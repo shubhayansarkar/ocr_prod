@@ -1,0 +1,33 @@
+name: ocr_cicd
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  dockerbuild:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v4
+      - name: Build The Docker Image
+        run: docker build . --file DockerFile --tag workflow-test:$(date +%s)
+  test:
+    run-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: install dependancies
+        run: |
+          python -m ppip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: run tests
+        run: pytest
