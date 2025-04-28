@@ -12,7 +12,7 @@ jobs:
       steps:
       - uses: actions/checkout@v4
       - name: Build The Docker Image
-        run: docker build . --file DockerFile --tag workflow-test:$(date +%s)
+        run: docker build -t doc1 .
   test:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +26,7 @@ jobs:
 
       - name: install dependancies
         run: |
-          python -m ppip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: run tests
