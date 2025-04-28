@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build The Docker Image
         run: docker build -t doc1 .
+      -name: run docker
+        run: docker run --rm -it doc1
   test:
     runs-on: ubuntu-latest
     steps:
