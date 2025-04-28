@@ -2,19 +2,19 @@ name: ocr_cicd
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   dockerbuild:
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v4
       - name: Build The Docker Image
-        run: docker build . --file DockerFile --tag workflow-test:$(date +%s)
+        run: docker build -t doc1 .
   test:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
 
       - name: install dependancies
         run: |
-          python -m ppip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: run tests
