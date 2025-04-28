@@ -19,6 +19,12 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v2
 
+      - name: Check if test PDF exists
+        run: |
+          if [ ! -f "test/samples/ex2.pdf" ]; then echo "test/samples/ex2.pdf not found!"; exit 1; fi
+          if [ ! -f "test/samples" ]; then echo "test/samples not found!"; exit 1; fi
+
+
       - name: set up python
         uses: actions/setup-python@v2
         with:
