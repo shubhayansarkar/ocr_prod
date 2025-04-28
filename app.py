@@ -2,7 +2,8 @@ from src.ocr_func import ocr_image, ocr_pdf
 import os
 mode = "image"
 # file_path = input("Enter path to the file: ").strip()
-file_path = r"tests\samples\ex1.jpg"
+# print(os.listdir())
+file_path = r"tests/samples/ex1.jpg"
 
 if mode == "image" and os.path.isfile(file_path):
     text = ocr_image(file_path)
