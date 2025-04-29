@@ -16,6 +16,7 @@ jobs:
       - name: Run the app inside Docker
         run: docker run --rm doc1
 
+
   test:
     runs-on: ubuntu-latest
     steps:
