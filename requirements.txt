@@ -3,3 +3,6 @@ PyMuPDF
 dotenv
 pytest
 Pillow
+fastapi
+uvicorn 
+python-multipart
