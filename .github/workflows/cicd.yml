@@ -15,8 +15,8 @@ jobs:
         run: docker build -t doc1 .
       - name: Run the app inside Docker
         run: |
-        docker run --rm doc1
-        docker stop doc1
+          docker run --rm doc1
+          docker stop doc1
       # - name: Wait for the app to be ready
       #   run: sleep 5
 
