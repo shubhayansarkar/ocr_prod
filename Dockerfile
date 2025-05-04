@@ -12,4 +12,5 @@ RUN pip install -r requirements.txt
 
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+# CMD ["python", "app.py"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
