@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile, Query
 from src.ocr_func import ocr_image, ocr_pdf
 import tempfile
 from pathlib import Path
+import uvicorn
 
 
 # mode = "image"
