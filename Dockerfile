@@ -1,25 +1,32 @@
 # Use the official Python image from the Docker Hub
 FROM python:3.11-slim
 
-# Create a new user with UID 10016
-RUN addgroup -g 10016 choreo && \
-    adduser  --disabled-password  --no-create-home --uid 10016 --ingroup choreo choreouser
+# Install necessary tools to add user/group
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    adduser \
+    && rm -rf /var/lib/apt/lists/*
 
-# Switch to the new user
-USER 10016
+# Create a new group and user with UID and GID 10016
+RUN addgroup --gid 10016 choreo && \
+    adduser --disabled-password --gecos "" --uid 10016 --gid 10016 --no-create-home choreouser
 
-
-
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the application code
+COPY . .
 
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+# Give ownership of /app to the non-root user
+RUN chown -R choreouser:choreo /app
 
+# Switch to the new user
+USER choreouser
 
-# Run app.py when the container launches
-# CMD ["python", "app.py"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Start the FastAPI app
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
