@@ -30,7 +30,7 @@ async def home():
     return "status ok"
 
 @app.post("/process_file")
-async def process_file(file: UploadFile = File(..., description="Upload a CSV or Excel file")):
+async def process_file(file: UploadFile = File(..., description="UPLOAD IAMGE OR PDF")):
     """
     Accepts a file, reads its content as text, and returns the text.
     """
